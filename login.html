@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="main.js"></script>
+  <title>Anime | Login</title>
+</head>
+
+<body>
+  <!-- Header -->
+  <section id="header">
+    <a href="#"><img width="130" src="img/Anime.png" alt="" class="logo"></a>
+    <div>
+      <ul id="navbar">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="About.html">Anime Merch</a></li>
+        <li><a href="Upcoming.html">Upcoming</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="cart.html">Cart</a></li>
+        <li><a class="active" href="login.html">Login</a></li>
+        <li><a href="singup.html">Signup</a></li>
+      </ul>
+    </div>
+    <div id="mobile">
+      <i id="bar" class="fa-solid fa-bars"></i>
+    </div>
+  </section>
+
+  <!-- Login Form -->
+  <section class="login-container">
+    <h2>Login to Animeee Store</h2>
+    <form id="login-form" class="login-form">
+      <input type="email" id="login-email" placeholder="Email" required>
+      <input type="password" id="login-password" placeholder="Password" required>
+      <button type="submit">Login</button>
+    </form>
+    <p>Don’t have an account? <a href="singup.html">Sign up</a></p>
+  </section>
+
+  <!-- Firebase SDK -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword }
+      from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+
+    // ✅ Firebase config (your details)
+    const firebaseConfig = {
+      apiKey: "AIzaSyDUC8urqa0iQJgmwNYF9_VxIcAElE-wPO0",
+      authDomain: "anime1-57755.firebaseapp.com",
+      projectId: "anime1-57755",
+      storageBucket: "anime1-57755.appspot.com",
+      messagingSenderId: "569719706980",
+      appId: "1:569719706980:web:b66d7c8c554607efae1671",
+      measurementId: "G-D6LW88PM87"
+    };
+
+    // ✅ Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // ✅ Handle login
+    const loginForm = document.getElementById("login-form");
+
+    loginForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const email = document.getElementById("login-email").value;
+      const password = document.getElementById("login-password").value;
+
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          alert("🎉 Login successful!");
+          window.location.href = "index.html"; // Redirect after login
+        })
+        .catch((error) => {
+          alert("❌ " + error.message);
+        });
+    });
+  </script>
+</body>
+
+</html>

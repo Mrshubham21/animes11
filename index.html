@@ -7,6 +7,29 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="main.js"></script>
+    <script type="module">
+import { auth } from "./firebase.js";
+import { signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+
+const loginLink = document.querySelector("#navbar li a[href='login.html']");
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    loginLink.textContent = "Logout";
+    loginLink.href = "#"; 
+    loginLink.addEventListener("click", () => {
+      signOut(auth).then(() => {
+        alert("Logged out ✅");
+        window.location.href = "index.html";
+      });
+    });
+  } else {
+    loginLink.textContent = "Login";
+    loginLink.href = "login.html";
+  }
+});
+</script>
+
     <title>Anime</title>
 </head>
 
@@ -16,8 +39,12 @@
         <div>
             <ul id="navbar">
                 <li><a class="active" href="index.html">Home</a></li>
-                <li><a  href="About.html">Anime Merch</a></li>
+                <li><a href="About.html">Anime Merch</a></li>
                 <li><a href="Upcoming.html">Upcoming</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="cart.html">Cart</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="singup.html">Singup</a></li>
             </ul>
         </div>
         <div id="mobile">
@@ -29,21 +56,57 @@
         <h2>Anime A JOURNEY</h2>
         <h1>A Japanese Creative Mind </h1>
     </section>
+    <section id="anime-history" class="section-p1 dark-theme">
+        <h2>Anime History</h2>
+        <p>Discover the fascinating journey of anime, from its early roots to its global impact today.</p>
+        <div class="history-content">
+            <div class="history-box">
+                <img src="img/histroy/tezuka.jpg" alt="Osamu Tezuka">
+                <h4>The Father of Anime</h4>
+                <p>Osamu Tezuka revolutionized Japanese animation with works like Astro Boy, shaping the anime industry
+                    forever.</p>
+            </div>
+            <div class="history-box">
+                <img src="img/histroy/evolution.webp" alt="Evolution of Anime">
+                <h4>Evolution Over Decades</h4>
+                <p>From hand-drawn frames to digital anime, the industry evolved into a global storytelling powerhouse.
+                </p>
+            </div>
+            <div class="history-box">
+                <!-- <img src="img/history/global.jpg" alt="Global Spread"> -->
+                  <img src="img/histroy/global.webp" alt="Evolution of Anime">
+                <h4>Global Popularity</h4>
+                <p>Series like Naruto and One Piece made anime a worldwide cultural phenomenon.</p>
+            </div>
+        </div>
+    </section>
     <section id="product1" class="section-p1">
         <h2>Featured Anime</h2>
         <p>Compelling stories, breathtaking animation – explore the world of top-tier anime</p>
         <div class="pro-container">
             <div class="pro">
                 <img src="img/featured anime/astroboy.jpg" alt="">
+                <div class="hover-info">
+                    Astro Boy is a Japanese manga and anime created by Osamu Tezuka in 1952.
+                    He’s a powerful robot boy with human emotions and a kind heart.
+                    The series explores themes of science, morality, and humanity.
+                    Astro Boy became one of Japan’s most iconic cultural symbols.
+                </div>
                 <div class="des">
-                    <h5>AstroBoy <br>
-                        (鉄腕アトム)
-                    </h5>
+                    <h5>AstroBoy<br>(鉄腕アトム)</h5>
                 </div>
             </div>
             <div class="pro">
+
                 <img src="img/featured anime/pokemon.jpg" alt="">
                 <div class="des">
+                    <div class="hover-info">
+                        Pokémon is a Japanese media franchise created by Satoshi Tajiri in 1996.
+                        It centers on trainers capturing and battling creatures called Pokémon.
+                        The franchise spans games, anime, films, and merchandise worldwide.
+                        It’s one of the most successful and beloved brands in entertainment history.
+
+                    </div>
                     <h5>Pokemon <br>
                         (ポケモン)</h5>
                 </div>
@@ -51,6 +114,13 @@
             <div class="pro">
                 <img src="img/featured anime/dragonball.jpg" alt="">
                 <div class="des">
+                    <div class="hover-info">
+                        Dragon Ball is a Japanese manga and anime created by Akira Toriyama in 1984.
+                        It follows Goku’s adventures as he trains in martial arts and searches for the Dragon Balls.
+                        The series features epic battles, powerful transformations, and memorable characters.
+                        It became one of the most influential and popular anime franchises worldwide.
+
+                    </div>
                     <h5>DragonBall <br>
                         (ドラゴンボール)</h5>
                 </div>
